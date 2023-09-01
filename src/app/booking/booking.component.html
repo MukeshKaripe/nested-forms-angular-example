@@ -1,0 +1,74 @@
+<div class="container">
+    <form [formGroup]="bookingForm">
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="temple">
+                <mat-option value="1">
+                    Tirupathi Balaji
+                </mat-option>
+                <mat-option value="2">
+                    Siddhivinayak
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="timeSlot">
+                <mat-option value="morning">
+                    Morning (5:00 am to 11:00am)
+                </mat-option>
+                <mat-option value="afternoon">
+                    Afternoon (12:00 pm to 2:00 pm)
+                </mat-option>
+                <mat-option value="evening">
+                    Afternoon (4:00 pm to 8:00 pm)
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addInfo()">Add Visitor</button>
+        <div formArrayName="visitorInfo">
+            <div *ngFor="let info of getInfoArray().controls;let i = index;">
+                <ng-container [formGroupName]="i">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="name" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput placeholder="Phone number" formControlName="phoneNumber">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" formControlName="email">
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" (click)="addVisitorInfo(i)">Add Visitor Address</button>
+                    <div formArrayName="info">
+                        <div *ngFor="let visitorInfo of getInfoAddressArray(i).controls; let j = index;">
+                            <ng-container [formGroupName]="j">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Address line 1</mat-label>
+                                    <input matInput placeholder="name" formControlName="addressLine1">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Address line 2</mat-label>
+                                    <input matInput placeholder="name" formControlName="addressLine2">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>City</mat-label>
+                                    <input matInput placeholder="name" formControlName="city">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Pincode</mat-label>
+                                    <input matInput placeholder="name" formControlName="pincode">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>State</mat-label>
+                                    <input matInput placeholder="name" formControlName="state">
+                                </mat-form-field>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    </form>
+</div>
